@@ -1,0 +1,61 @@
+{
+    "name": "koji",
+    "displayName": "Koji",
+    "description": "Koji: syntax highlighting, and the errors, types and declarations of the language server (kojic lsp)",
+    "version": "0.1.0",
+    "publisher": "koji-language",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/koji-language/koji-vscode"
+    },
+    "engines": {
+        "vscode": "^1.60.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [
+            {
+                "id": "koji",
+                "aliases": [
+                    "Koji",
+                    "koji"
+                ],
+                "extensions": [
+                    ".kj"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "koji",
+                "scopeName": "source.koji",
+                "path": "./syntaxes/koji.tmLanguage.json"
+            }
+        ],
+        "configuration": {
+            "title": "Koji",
+            "properties": {
+                "koji.kojicPath": {
+                    "type": "string",
+                    "default": "kojic",
+                    "description": "The kojic command (its path when it is not on the PATH): the extension runs `kojic lsp`."
+                }
+            }
+        }
+    },
+    "main": "./extension.js",
+    "activationEvents": [
+        "onLanguage:koji"
+    ],
+    "dependencies": {
+        "vscode-languageclient": "^9.0.1"
+    },
+    "scripts": {
+        "update-grammar": "sh scripts/update-grammar.sh",
+        "package": "vsce package"
+    }
+}
