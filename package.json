@@ -8,8 +8,8 @@
     "license": "MIT",
     "icon": "images/icon.png",
     "galleryBanner": {
-        "color": "#c2410c",
-        "theme": "dark"
+        "color": "#ffd372",
+        "theme": "light"
     },
     "homepage": "https://koji-language.github.io/koji-website/",
     "repository": {

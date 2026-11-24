@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+-   The icon is the logo of Koji: a wooden box of rice.
+
 ## 0.1.0
 
 The first version, for Koji 0.1.0:
