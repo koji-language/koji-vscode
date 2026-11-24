@@ -11,6 +11,13 @@ that aims to be simple, readable and fast, for Visual Studio Code:
     what is under the mouse, and where a name is declared (`F12`, or `Ctrl+click`), in the file or
     in the module it comes from.
 
+## Installing
+
+Search for **Koji** in the extensions of the editor, or install it from the
+[Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=koji-language.koji)
+or, for VSCodium, Cursor and other editors, from
+[Open VSX](https://open-vsx.org/extension/koji-language/koji).
+
 ## Requirements
 
 The language server is `kojic`, the compiler of Koji: install it from the
