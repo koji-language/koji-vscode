@@ -1,4 +1,10 @@
+.github/**
 .vscode/**
-*.vsix
 scripts/**
+*.vsix
 .gitignore
+**/*.map
+**/*.d.ts
+**/*.md.orig
+node_modules/**/README.md
+node_modules/**/CHANGELOG.md
