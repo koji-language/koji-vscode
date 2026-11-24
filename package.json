@@ -1,16 +1,33 @@
 {
     "name": "koji",
     "displayName": "Koji",
-    "description": "Koji: syntax highlighting, and the errors, types and declarations of the language server (kojic lsp)",
+    "description": "Koji for VS Code: syntax highlighting, and the errors, types and declarations of the Koji language server",
     "version": "0.1.0",
     "publisher": "koji-language",
+    "preview": true,
     "license": "MIT",
+    "icon": "images/icon.png",
+    "galleryBanner": {
+        "color": "#c2410c",
+        "theme": "dark"
+    },
+    "homepage": "https://koji-language.github.io/koji-website/",
     "repository": {
         "type": "git",
         "url": "https://github.com/koji-language/koji-vscode"
     },
+    "bugs": {
+        "url": "https://github.com/koji-language/koji-vscode/issues"
+    },
+    "keywords": [
+        "koji",
+        "kj",
+        "language server",
+        "lsp",
+        "syntax"
+    ],
     "engines": {
-        "vscode": "^1.60.0"
+        "vscode": "^1.82.0"
     },
     "categories": [
         "Programming Languages"
@@ -53,6 +70,10 @@
     ],
     "dependencies": {
         "vscode-languageclient": "^9.0.1"
+    },
+    "devDependencies": {
+        "@vscode/vsce": "^4.1.1",
+        "ovsx": "^1.4.0"
     },
     "scripts": {
         "update-grammar": "sh scripts/update-grammar.sh",

@@ -1,0 +1,52 @@
+# Publishes the version of a tag (v0.1.0): to the Visual Studio Marketplace (secret VSCE_PAT), to
+# Open VSX (secret OVSX_PAT), each only once its secret is set, and as a .vsix on the release of the
+# tag on GitHub.
+name: Publish
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+
+      - name: The version of the tag is that of package.json
+        run: test "v$(node -p "require('./package.json').version")" = "$GITHUB_REF_NAME"
+
+      - run: npx vsce package --out "koji-${GITHUB_REF_NAME#v}.vsix"
+
+      - name: Visual Studio Marketplace
+        env:
+          VSCE_PAT: ${{ secrets.VSCE_PAT }}
+        run: |
+          if [ -z "$VSCE_PAT" ]; then
+            echo "no VSCE_PAT: not published to the Marketplace"
+            exit 0
+          fi
+          npx vsce publish --packagePath "koji-${GITHUB_REF_NAME#v}.vsix"
+
+      - name: Open VSX
+        env:
+          OVSX_PAT: ${{ secrets.OVSX_PAT }}
+        run: |
+          if [ -z "$OVSX_PAT" ]; then
+            echo "no OVSX_PAT: not published to Open VSX"
+            exit 0
+          fi
+          npx ovsx publish "koji-${GITHUB_REF_NAME#v}.vsix"
+
+      - name: The release on GitHub
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" "koji-${GITHUB_REF_NAME#v}.vsix" --title "Koji for VS Code ${GITHUB_REF_NAME#v}" --notes "See CHANGELOG.md." --prerelease
