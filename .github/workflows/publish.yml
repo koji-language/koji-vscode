@@ -1,7 +1,8 @@
 # Publishes the version of a tag (v0.1.0): to the Visual Studio Marketplace (secret VSCE_PAT), to
 # Open VSX (secret OVSX_PAT), each only once its secret is set, and as a .vsix on the release of the
-# tag on GitHub. The tag may come from a release made on GitHub (Releases, Draft a new release, a new
-# tag on publish): the .vsix is then added to that release.
+# tag on GitHub, with the notes of the version in CHANGELOG.md. The tag may come from a release made
+# on GitHub (Releases, Draft a new release, a new tag on publish): the .vsix is then added to that
+# release, and its notes are those of CHANGELOG.md if it has none.
 name: Publish
 
 on:
@@ -47,6 +48,9 @@ jobs:
           fi
           npx ovsx publish "koji-${GITHUB_REF_NAME#v}.vsix"
 
+      - name: The notes of the version, from CHANGELOG.md
+        run: awk -v version="${GITHUB_REF_NAME#v}" '/^## / { found = index($0, "## " version) == 1; next } found' CHANGELOG.md > NOTES.md
+
       - name: The release on GitHub
         env:
           GH_TOKEN: ${{ github.token }}
@@ -54,6 +58,9 @@ jobs:
           vsix="koji-${GITHUB_REF_NAME#v}.vsix"
           if gh release view "$GITHUB_REF_NAME" > /dev/null 2>&1; then
             gh release upload "$GITHUB_REF_NAME" "$vsix" --clobber
+            if [ -z "$(gh release view "$GITHUB_REF_NAME" --json body --jq .body)" ]; then
+              gh release edit "$GITHUB_REF_NAME" --notes-file NOTES.md
+            fi
           else
-            gh release create "$GITHUB_REF_NAME" "$vsix" --title "Koji for VS Code ${GITHUB_REF_NAME#v}" --notes "See CHANGELOG.md." --prerelease
+            gh release create "$GITHUB_REF_NAME" "$vsix" --title "Koji for VS Code ${GITHUB_REF_NAME#v}" --notes-file NOTES.md --prerelease
           fi
