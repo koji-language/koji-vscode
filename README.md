@@ -48,11 +48,11 @@ take it too. Change it there, then copy it here with `npm run update-grammar`.
 ## Publishing
 
 `.github/workflows/publish.yml` publishes a version when its tag is pushed: to the Visual Studio
-Marketplace with the secret `VSCE_PAT`, to Open VSX with `OVSX_PAT` (each left out while its
-secret is not set), and as a `.vsix` on the release of the tag on GitHub. The version of the tag
-must be that of `package.json`. The tag can be made with a release on GitHub (Releases, Draft a
-new release, `v0.1.1` as a new tag on `main`), or pushed (`git tag v0.1.1 && git push origin
-v0.1.1`).
+Marketplace with the secret `VSCE_PAT`, to Open VSX with `OVSX_PAT` (each left out while its secret
+is not set), and as a `.vsix` on the release of the tag on GitHub. The version of the tag must be
+that of `package.json`, and its notes come from its section of `CHANGELOG.md`. The tag can be made
+with a release on GitHub (Releases, Draft a new release, `v0.1.1` as a new tag on `main`), or pushed
+(`git tag v0.1.1 && git push origin v0.1.1`).
 
 ## Issues
 
