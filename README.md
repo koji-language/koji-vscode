@@ -9,7 +9,9 @@ that aims to be simple, readable and fast, for Visual Studio Code:
     quotes, and indentation after `{`, `(` and `[`.
 -   The language server of Koji (`kojic lsp`): every error of a file as it is edited, the type of
     what is under the mouse, and where a name is declared (`F12`, or `Ctrl+click`), in the file or
-    in the module it comes from.
+    in the module it comes from, and the file formatted in the style of Koji (`kojic fmt`) with
+    Format Document, and when it is saved (the setting `editor.formatOnSave` of `[koji]` turns it
+    off).
 
 ## Installing
 

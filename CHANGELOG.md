@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+-   Format Document, and formatting when a file is saved, in the style of Koji (`kojic fmt`), with
+    the language server of Koji 0.2.
+
 ## 0.1.1
 
 -   The icon is the logo of Koji: a wooden box of rice.
