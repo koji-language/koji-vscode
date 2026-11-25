@@ -2,7 +2,7 @@
     "name": "koji",
     "displayName": "Koji",
     "description": "Koji for VS Code: syntax highlighting, and the errors, types and declarations of the Koji language server",
-    "version": "0.1.1",
+    "version": "0.2.0",
     "publisher": "koji-language",
     "preview": true,
     "license": "MIT",
@@ -61,6 +61,13 @@
                     "default": "kojic",
                     "description": "The kojic command (its path when it is not on the PATH): the extension runs `kojic lsp`."
                 }
+            }
+        },
+        "configurationDefaults": {
+            "[koji]": {
+                "editor.formatOnSave": true,
+                "editor.tabSize": 4,
+                "editor.insertSpaces": true
             }
         }
     },
