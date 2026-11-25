@@ -2,7 +2,7 @@
     "name": "koji",
     "displayName": "Koji",
     "description": "Koji for VS Code: syntax highlighting, and the errors, types and declarations of the Koji language server",
-    "version": "0.1.1",
+    "version": "0.2.0",
     "publisher": "koji-language",
     "preview": true,
     "license": "MIT",

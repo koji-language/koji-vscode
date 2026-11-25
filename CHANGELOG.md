@@ -1,9 +1,13 @@
 # Changelog
 
-## Unreleased
+## 0.2.0
+
+For Koji 0.2.0:
 
 -   Format Document, and formatting when a file is saved, in the style of Koji (`kojic fmt`), with
-    the language server of Koji 0.2.
+    the language server of Koji 0.2.0 (with an earlier `kojic`, files are not formatted).
+-   The hover shows the comment above a declaration as its documentation, from the language server
+    of Koji 0.2.0.
 
 ## 0.1.1
 
