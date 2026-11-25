@@ -1,6 +1,7 @@
 # Publishes the version of a tag (v0.1.0): to the Visual Studio Marketplace (secret VSCE_PAT), to
 # Open VSX (secret OVSX_PAT), each only once its secret is set, and as a .vsix on the release of the
-# tag on GitHub.
+# tag on GitHub. The tag may come from a release made on GitHub (Releases, Draft a new release, a new
+# tag on publish): the .vsix is then added to that release.
 name: Publish
 
 on:
@@ -49,4 +50,10 @@ jobs:
       - name: The release on GitHub
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release create "$GITHUB_REF_NAME" "koji-${GITHUB_REF_NAME#v}.vsix" --title "Koji for VS Code ${GITHUB_REF_NAME#v}" --notes "See CHANGELOG.md." --prerelease
+        run: |
+          vsix="koji-${GITHUB_REF_NAME#v}.vsix"
+          if gh release view "$GITHUB_REF_NAME" > /dev/null 2>&1; then
+            gh release upload "$GITHUB_REF_NAME" "$vsix" --clobber
+          else
+            gh release create "$GITHUB_REF_NAME" "$vsix" --title "Koji for VS Code ${GITHUB_REF_NAME#v}" --notes "See CHANGELOG.md." --prerelease
+          fi
